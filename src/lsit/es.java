@@ -129,6 +129,48 @@ public class es<T> {
 
         prev.setNext(next);
 
+        return runner.getData();
+
+    }
+
+    public void move(int from, int to) {
+
+        if (isEmpty())
+            throw new RuntimeException("");
+
+        if (to > size() || from > size())
+            throw new RuntimeException("");
+
+        ItemG<T> runner = head;
+
+        ItemG<T> prev;
+        ItemG<T> tomove = null;
+
+        for (int i = 0; i < from && runner.getNext() != null; i++) {
+
+            if (i == from - 1) {
+
+                tomove = runner.getNext();
+
+                runner.setNext(tomove.getNext());
+
+                tomove.setNext(null);
+
+            }
+
+        }
+
+        for (int i = 0; i < to && runner.getNext() != null; i++) {
+            if (i == to - 1) {
+
+                ItemG<T> temp = runner.getNext();
+
+                runner.setNext(tomove);
+                tomove.setNext(temp);
+
+            }
+        }
+
     }
 
     public T head() {
