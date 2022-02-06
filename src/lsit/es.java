@@ -1,6 +1,35 @@
 package lsit;
 
-// Garbage Collector
+/*
+ * Challenge 1: Abstrakte Datentypen => Nur Schnittstelle (die öffentlichen Methoden, die er bietet) muss bekannt sein,
+ * nicht die
+ * Implementation (wie es programmiert
+ * ist)
+ *    (Verkettete Liste vs. Array)
+ *
+ * Challenge 2: Haben Sie eine Idee, wie Sie auf die Überprüfungen auf head == null verzichten können?
+ *
+ * Challenge 3: DVK
+ */
+
+/*
+ * Desiderata:
+ * 1) concat(Liste<T> otherList) => void | Mehrere Elemente gleichzeitig anhängen 
+ * 2) get(int index) => T | Element an einer bestimmten Stelle zurückgeben
+ * 3) deleteAt(int index) => T | void
+ *    // T data = list.deleteAt(5)
+ *    // list.deleteAt(5) => Rückgabewert wird verworfen
+ * 4) move(int from, int to)
+ * 5) set(int index, T data) überschreiben
+ * 6) insert(int index, T data)
+ * 7) size() => Größe der Liste
+ * 8) filter() => Auswählen nach Kriterien
+ * 9) get(T data) => Suche nach Daten
+ * 10) indexOf(T data) => Suche nach Index von Daten
+ *
+ * Nice to have:
+ * 1) maxSize()
+ */
 
 public class es<T> {
     private ItemG<T> head;
@@ -18,7 +47,7 @@ public class es<T> {
     }
 
     public int size() {
-        ItemG runner = head;
+        ItemG<T> runner = head;
         int size = 0;
 
         while (runner != null) {
@@ -29,8 +58,34 @@ public class es<T> {
         return size;
     }
 
+    public void concat(es<T> b) {
+
+        while (!b.isEmpty()) {
+
+            this.enqueue(b.dequeue());
+
+        }
+
+    }
+
+    public T get(int index) {
+
+        if (isEmpty()) {
+            return null;
+        }
+
+        ItemG<T> runner = head;
+
+        for (int i = 0; i < index; i++) {
+            runner = runner.getNext();
+        }
+
+        return runner.getData();
+
+    }
+
     public void enqueue(T data) {
-        ItemG newItemG = new ItemG<T>(data);
+        ItemG<T> newItemG = new ItemG<T>(data);
 
         if (head == null) {
             head = newItemG;
@@ -53,6 +108,27 @@ public class es<T> {
             head = head.getNext();
             return data;
         }
+    }
+
+    public T deleteAt(int index) {
+
+        if (isEmpty()) {
+            return null;
+        }
+        ItemG<T> prev = null;
+        ItemG<T> runner = head;
+        ItemG<T> next = null;
+        for (int i = 0; i < index; i++) {
+            if (i == index - 1)
+                prev = runner;
+
+            runner = runner.getNext();
+        }
+
+        next = runner.getNext();
+
+        prev.setNext(next);
+
     }
 
     public T head() {
@@ -80,11 +156,11 @@ class ItemG<T> {
         this.data = data;
     }
 
-    public ItemG getNext() {
+    public ItemG<T> getNext() {
         return next;
     }
 
-    public void setNext(ItemG next) {
+    public void setNext(ItemG<T> next) {
         this.next = next;
     }
 }
