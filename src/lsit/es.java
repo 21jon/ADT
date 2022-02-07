@@ -171,9 +171,9 @@ public class es<T> {
 
         ItemG<T> runner = head;
         String sb = "";
-        for (int i = 0; i < size() - 1; i++) {
+        for (int i = 0; i < size(); i++) {
 
-            sb += "i: " + runner.getData().toString();
+            sb += i + ": " + runner.getData().toString() + "\n";
             runner = runner.getNext();
 
         }

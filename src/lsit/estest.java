@@ -16,15 +16,10 @@ public class estest {
         // System.out.println(it.get(5));
         // System.out.println(it.isEmpty());
         // System.out.println(it.deleteAt(5));
+
         System.out.println(it.debugString());
-        // it.move(1, 5);
-        System.out.println(it.get(1));
-        System.out.println(it.get(2));
-        System.out.println(it.get(3));
-        System.out.println(it.get(4));
-        System.out.println(it.get(5));
-        System.out.println(it.get(6));
-        System.out.println(it.get(7));
+        it.move(1, 5);
+        System.out.println(it.debugString());
 
     }
 
