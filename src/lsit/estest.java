@@ -15,8 +15,8 @@ public class estest {
 
         // System.out.println(it.get(5));
         // System.out.println(it.isEmpty());
-        System.out.println(it.deleteAt(5));
-
+        // System.out.println(it.deleteAt(5));
+        System.out.println(it.debugString());
         // it.move(1, 5);
         System.out.println(it.get(1));
         System.out.println(it.get(2));

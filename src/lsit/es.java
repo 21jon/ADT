@@ -74,6 +74,9 @@ public class es<T> {
             return null;
         }
 
+        if (index > size())
+            throw new IndexOutOfBoundsException("To big");
+
         ItemG<T> runner = head;
 
         for (int i = 0; i < index - 1; i++) {
@@ -115,23 +118,26 @@ public class es<T> {
         if (isEmpty()) {
             return null;
         }
-        ItemG<T> prev = null;
+        if (index == 0) {
+
+            T data = head.getData();
+            head = head.getNext();
+            return data;
+
+        }
+
         ItemG<T> runner = head;
         ItemG<T> next = null;
-        for (int i = 1; i < index; i++) {
-            if (i == index - 2)
-                prev = runner;
+        for (int i = 1; i < index - 1; i++) {
 
             runner = runner.getNext();
         }
 
         next = runner.getNext();
 
-        System.out.println(next == null);
+        runner.setNext(runner.getNext().getNext());
 
-        prev.setNext(next);
-
-        return runner.getData();
+        return next.getData();
 
     }
 
@@ -143,43 +149,36 @@ public class es<T> {
         if (to > size() || from > size())
             throw new RuntimeException("");
 
-        ItemG<T> runner = head;
-
-        ItemG<T> tomove = null;
-
-        for (int i = 0; i < from && runner.getNext() != null; i++) {
-
-            if (i == from - 1) {
-
-                tomove = runner.getNext();
-
-                runner.setNext(tomove.getNext());
-
-                tomove.setNext(null);
-
-            }
-
-        }
-        runner = head;
-        for (int i = 0; i < to && runner.getNext() != null; i++) {
-            if (i == to - 1) {
-
-                ItemG<T> temp = runner.getNext();
-
-                runner.setNext(tomove);
-                tomove.setNext(temp);
-
-            }
-        }
-
     }
 
+    /**
+     * 
+     * @return
+     */
     public T head() {
         if (isEmpty()) {
             throw new RuntimeException("Queue is empty!");
         } else {
             return head.getData();
         }
+    }
+
+    public String debugString() {
+
+        if (isEmpty()) {
+            return null;
+        }
+
+        ItemG<T> runner = head;
+        String sb = "";
+        for (int i = 0; i < size() - 1; i++) {
+
+            sb += "i: " + runner.getData().toString();
+            runner = runner.getNext();
+
+        }
+        return sb;
+
     }
 }
 
