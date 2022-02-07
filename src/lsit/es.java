@@ -76,7 +76,7 @@ public class es<T> {
 
         ItemG<T> runner = head;
 
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < index - 1; i++) {
             runner = runner.getNext();
         }
 
@@ -118,14 +118,16 @@ public class es<T> {
         ItemG<T> prev = null;
         ItemG<T> runner = head;
         ItemG<T> next = null;
-        for (int i = 0; i < index; i++) {
-            if (i == index - 1)
+        for (int i = 1; i < index; i++) {
+            if (i == index - 2)
                 prev = runner;
 
             runner = runner.getNext();
         }
 
         next = runner.getNext();
+
+        System.out.println(next == null);
 
         prev.setNext(next);
 
@@ -143,7 +145,6 @@ public class es<T> {
 
         ItemG<T> runner = head;
 
-        ItemG<T> prev;
         ItemG<T> tomove = null;
 
         for (int i = 0; i < from && runner.getNext() != null; i++) {
@@ -159,7 +160,7 @@ public class es<T> {
             }
 
         }
-
+        runner = head;
         for (int i = 0; i < to && runner.getNext() != null; i++) {
             if (i == to - 1) {
 
