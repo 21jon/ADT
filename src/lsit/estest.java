@@ -17,10 +17,23 @@ public class estest {
         // System.out.println(it.isEmpty());
         // System.out.println(it.deleteAt(5));
 
-        System.out.println(it.debugString());
-        it.move(1, 5);
-        System.out.println(it.debugString());
+        it.insert(5, (Integer) 420);
 
+        it.debugString();
+        // it.move(1, 5);
+        // it.debugString();
+
+    }
+
+}
+
+/**
+ * Innerestest
+ */
+class Innerestest {
+
+    public static void main(String[] args) {
+        System.out.println("Hallo Welt");
     }
 
 }

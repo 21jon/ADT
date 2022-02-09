@@ -79,7 +79,7 @@ public class es<T> {
 
         ItemG<T> runner = head;
 
-        for (int i = 0; i < index - 1; i++) {
+        for (int i = 0; i < index; i++) {
             runner = runner.getNext();
         }
 
@@ -151,6 +151,43 @@ public class es<T> {
 
     }
 
+    public void insert(int index, T data) {
+
+        ItemG<T> f;
+
+        ItemG<T> pre = getPreG(index);
+
+        f = pre.getNext();
+
+        ItemG<T> neu = new ItemG<T>(data);
+
+        pre.setNext(neu);
+        neu.setNext(f);
+
+    }
+
+    private ItemG<T> getPreG(int index) {
+        index--;
+
+        if (isEmpty()) {
+            return null;
+        }
+
+        if (index > size())
+            throw new IndexOutOfBoundsException("To big");
+
+        ItemG<T> runner = head;
+
+        for (int i = 0; i < index; i++) {
+
+            runner = runner.getNext();
+
+        }
+
+        return runner;
+
+    }
+
     /**
      * 
      * @return
@@ -163,21 +200,23 @@ public class es<T> {
         }
     }
 
-    public String debugString() {
+    public void debugString() {
 
         if (isEmpty()) {
-            return null;
+            return;
         }
 
         ItemG<T> runner = head;
         String sb = "";
-        for (int i = 0; i < size(); i++) {
+        int i = 0;
+        while (runner != null) {
 
             sb += i + ": " + runner.getData().toString() + "\n";
             runner = runner.getNext();
+            i++;
 
         }
-        return sb;
+        System.out.println(sb);
 
     }
 }
@@ -206,3 +245,17 @@ class ItemG<T> {
         this.next = next;
     }
 }
+
+/*
+ * 
+ * get element anstelle index -1
+ * 
+ * create new element
+ * 
+ * get temp set it element.next()
+ * 
+ * set element next to element
+ * 
+ * element next is temp
+ * 
+ */
